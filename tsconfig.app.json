@@ -22,7 +22,11 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@component/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@stores*": ["stores/*"],
+      "@types/*": ["types/*"],
+      "@data/*": ["data/*"]
     }
   },
   "include": ["src"]
