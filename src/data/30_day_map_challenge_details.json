@@ -1,0 +1,258 @@
+[
+  {
+    "date": "31-10-2024",
+    "name": "Challenge hasn't started",
+    "description": "The Challenge has not yet started. Please come back on the 1st November 2024",
+    "day": 31,
+    "month": 10,
+    "year": 2024
+  },
+  {
+    "date": "01-11-2024",
+    "name": "Points",
+    "description": "30DayMapChallenge classic: A map with points. Start the challenge with points. Show individual locations\u2014anything from cities to trees or more abstract concepts. Simple, but a key part of the challenge. \ud83d\udccd",
+    "day": 1,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "02-11-2024",
+    "name": "Lines",
+    "description": "30DayMapChallenge classic: A map with focus on lines. Roads, rivers, routes, or borders\u2014this day is all about mapping connections and divisions. Another traditional way to keep things moving. \ud83d\udccf",
+    "day": 2,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "03-11-2024",
+    "name": "Polygons",
+    "description": "30DayMapChallenge classic: A map with polygons. Regions, countries, lakes\u2014this day is for defined shapes that fill space. \ud83d\uded1",
+    "day": 3,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "04-11-2024",
+    "name": "Hexagons",
+    "description": "Maps using hexagonal grids. Step away from square grids and try mapping with hexagons. A fun way to show density or spatial patterns. \ud83d\udd37",
+    "day": 4,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "05-11-2024",
+    "name": "A journey",
+    "description": "Map any journey. Personal or not. Trace a journey\u2014this could be a daily commute, a long-distance trip, or something from history. The key is to map movement from one place to another. \ud83d\udeb6\u200d\u2642\ufe0f\u2708\ufe0f",
+    "day": 5,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "06-11-2024",
+    "name": "Raster",
+    "description": "A map using raster data. Rasters are everywhere, but today\u2019s focus is purely on grids and pixels\u2014satellite imagery, heatmaps, or any continuous surface data. \ud83d\udfe6\ud83d\udfe7",
+    "day": 6,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "07-11-2024",
+    "name": "Vintage style",
+    "description": "Map something modern in a vintage aesthetic. Create a map that captures the look and feel of historical cartography but focuses on a contemporary topic. Use muted colors, fonts, and classic elements. \ud83d\udd70\ufe0f\ud83d\uddfa\ufe0f",
+    "day": 7,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "08-11-2024",
+    "name": "Humanitarian Data Exchange (HDX)",
+    "description": "Use data from HDX to map humanitarian topics. Explore the datasets from the Humanitarian Data Exchange, covering disaster response, health, population, and development. Map for social good. \ud83c\udf0d\ud83d\ude91",
+    "day": 8,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "09-11-2024",
+    "name": "AI only",
+    "description": "This day is all about prompt engineering. Use AI tools like DALL-E, MidJourney, Stable Diffusion, or ChatGPT with geospatial capabilities to create a map based on AI-generated content. The challenge is to get the right prompt and critically assess the output\u2014how well does AI capture or distort the map's intent?",
+    "day": 9,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "10-11-2024",
+    "name": "Pen & paper",
+    "description": "Draw a map by hand. Go analog and draw a map using pen and paper. The result doesn\u2019t have to be perfect\u2014it\u2019s about the creative process. \u270f\ufe0f\ud83d\uddfa\ufe0f",
+    "day": 10,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "11-11-2024",
+    "name": "Arctic",
+    "description": "Map the Arctic. Whether it\u2019s ice coverage, wildlife habitats, or the effects of climate change, this day is all about mapping the cold extremes of the Arctic. \u2744\ufe0f\ud83e\uddca",
+    "day": 11,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "12-11-2024",
+    "name": "Time and space",
+    "description": "Map something where time matters. Visualize change over time\u2014urban growth, migration, or environmental shifts. Show the relationship between time and geography. \u23f3\ud83c\udf0d",
+    "day": 12,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "13-11-2024",
+    "name": "A new tool",
+    "description": "Use a tool you\u2019ve never tried before. The challenge has always been about trying new things. Use a tool, software, or drawing technique you\u2019ve never worked with before. \ud83e\uddea\ud83d\udd27",
+    "day": 13,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "14-11-2024",
+    "name": "A world map",
+    "description": "Map the whole world. Whether it\u2019s continents, ecosystems, or oceans, this is the day to map the entire planet. \ud83c\udf0d",
+    "day": 14,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "15-11-2024",
+    "name": "My data",
+    "description": "Map something personal. Map data from your own life\u2014this could be places you\u2019ve traveled, your daily routine, or any other personal touch. \ud83d\uddd2\ufe0f",
+    "day": 15,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "16-11-2024",
+    "name": "Choropleth",
+    "description": "Classic choropleth map. Use color to show data variation across regions. This simple but effective technique is a staple for showing thematic differences. \ud83c\udfa8",
+    "day": 16,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "17-11-2024",
+    "name": "Collaborative map",
+    "description": "Collaborate with others on a single map. For today\u2019s challenge, team up! Whether you work with one person or several, the idea is to combine your efforts on a single map. \ud83e\udd1d\ud83d\uddfa\ufe0f",
+    "day": 17,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "18-11-2024",
+    "name": "3D",
+    "description": "Map with depth. Add a third dimension to your map. Whether it\u2019s visualizing elevation, buildings, or something more abstract, today\u2019s about thinking beyond flat surfaces. \ud83c\udfa2\ud83c\udfd4\ufe0f",
+    "day": 18,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "19-11-2024",
+    "name": "Typography",
+    "description": "Map focused on typography. Let text and words do the heavy lifting today. Whether you\u2019re focusing on place names, labeling, or using text to create shapes and patterns. \u270d\ufe0f\ud83c\udd70\ufe0f",
+    "day": 19,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "20-11-2024",
+    "name": "OpenStreetMap",
+    "description": "Use OpenStreetMap data to create something. OpenStreetMap offers rich, editable data from roads to buildings and beyond. The goal is to showcase the power of this community-driven dataset. \ud83d\uddfa\ufe0f\ud83d\udccd",
+    "day": 20,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "21-11-2024",
+    "name": "Conflict",
+    "description": "Map a conflict. Political, territorial, or social\u2014there are conflicts all around us. Map boundaries, tension points, or the outcomes of conflicts. \u2694\ufe0f\ud83d\uded1",
+    "day": 21,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "22-11-2024",
+    "name": "2 colours",
+    "description": "Create a map using only 2 colors. No gradients or shading\u2014just two flat colors. This restriction encourages creativity in design and forces you to think about how to clearly convey your message with minimal color.",
+    "day": 22,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "23-11-2024",
+    "name": "Memory",
+    "description": "Map based on memory. Create a map of a place you remember\u2014hometown, favorite destination, or somewhere meaningful. It doesn\u2019t need to be perfectly accurate, just how you recall it. \ud83d\udcad\ud83d\uddfa\ufe0f",
+    "day": 23,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "24-11-2024",
+    "name": "Only circular shapes",
+    "description": "Map using only circles. Everything should be circular. Forget straight lines and sharp edges, and see how creative you can get by sticking to round shapes. \ud83d\udd35\u2b55",
+    "day": 24,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "25-11-2024",
+    "name": "Heat",
+    "description": "Map something related to heat. Focus on heat, whether it\u2019s actual temperature or areas of intensity\u2014like heatmaps of activity or metaphorical heat. \ud83d\udd25\ud83c\udf21\ufe0f",
+    "day": 25,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "26-11-2024",
+    "name": "Map projections",
+    "description": "Explore different map projections and how they distort the world. Whether it's focusing on the classic Mercator, the Peters projection, or a more obscure one like the Waterman Butterfly, today is about playing with how we represent the round Earth on flat surfaces.",
+    "day": 26,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "27-11-2024",
+    "name": "Micromapping",
+    "description": "Map something small and precise. Zoom in and map a small area in high detail. It could be a single building, a street corner, or a tiny plot of land. Focus on accuracy at a small scale. \ud83e\uddd0\ud83d\udd0d",
+    "day": 27,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "28-11-2024",
+    "name": "The blue planet",
+    "description": "Map oceans, rivers, and lakes. Focus on water today. Map the oceans, rivers, or lakes, diving deep into marine environments or water systems. \ud83c\udf0a\ud83d\udc0b",
+    "day": 28,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "29-11-2024",
+    "name": "Overture",
+    "description": "Use data from the Overture Maps Foundation. Explore data from Overture Maps Foundation to create a map that highlights new geographic datasets. A great opportunity to dive into open geospatial data! \ud83c\udf0d\ud83d\udcca",
+    "day": 29,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "30-11-2024",
+    "name": "The final map",
+    "description": "The final challenge\u2014your choice! Revisit a technique from earlier in the month, refine an idea, or try something completely new. End the challenge on a high note with a map that showcases your creativity, growth, or just pure fun! \ud83c\udf89\ud83c\udf10",
+    "day": 30,
+    "month": 11,
+    "year": 2024
+  },
+  {
+    "date": "1-12-2024",
+    "name": "Challenge has completed!",
+    "description": "The Challenge has been completed. Please enjoys the 2024 maps.",
+    "day": 1,
+    "month": 12,
+    "year": 2024
+  }
+]

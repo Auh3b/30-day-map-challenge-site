@@ -3,30 +3,25 @@ import {
   Divider,
   Grid2,
   Paper,
-  Popper,
   Typography,
   useColorScheme,
 } from '@mui/material';
-import {
-  Fragment,
-  MouseEvent,
-  PropsWithChildren,
-  useCallback,
-  useState,
-} from 'react';
+import { Fragment, PropsWithChildren, useCallback, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
-import SingleModeSwitch from '@component/common/SingleModeSwitch';
+import SingleModeSwitch from '@components/common/SingleModeSwitch';
 import {
   DarkModeOutlined,
   InfoOutlined,
   LightModeOutlined,
 } from '@mui/icons-material';
+import DayChallengeDetailsModal from '@components/UI/DayChallengeDetailsModal';
 
 export default function index() {
   return (
     <Layout>
+      <DayChallengeDetailsModal />
       <Header />
       <Content>
         <ThemeChanger />
@@ -65,6 +60,7 @@ function ThemeChanger() {
     <Box
       position={'absolute'}
       top={8}
+      zIndex={100}
       right={16}>
       <SingleModeSwitch
         title='mode'
@@ -85,6 +81,7 @@ function DetailToggler() {
       <Box
         position={'absolute'}
         top={8}
+        zIndex={100}
         left={16}>
         <SingleModeSwitch
           title='information'

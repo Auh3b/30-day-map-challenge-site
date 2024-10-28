@@ -1,4 +1,4 @@
-import MapContainer from '@component/common/MapContainer';
+import MapContainer from '@components/common/MapContainer';
 import { Grid2 as Grid } from '@mui/material';
 import { PropsWithChildren } from 'react';
 
