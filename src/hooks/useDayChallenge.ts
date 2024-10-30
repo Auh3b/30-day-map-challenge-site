@@ -5,8 +5,8 @@ export default function useDayChallenge() {
   const setDayChallengeInfo = usePageStore(
     (state) => state.setDayChallengeInfo,
   );
+
   const setDayChallenge = (value: number) => {
-    console.log(value);
     setDayChallengeInfo(MapChallengeData[value]);
   };
 

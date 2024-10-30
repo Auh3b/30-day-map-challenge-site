@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from '@mui/material';
 import usePageStore from '@storesusePageStore';
-import { Fragment, PropsWithChildren, ReactNode, useState } from 'react';
+import { Fragment, PropsWithChildren, ReactNode, useCallback } from 'react';
 
 export default function DayChallengeDetailsModal() {
   return (
@@ -24,12 +24,22 @@ interface DetailsModalWrapperProps {
 function DetailsModalWrapper(
   props: PropsWithChildren<DetailsModalWrapperProps>,
 ) {
-  const [isOpen, setIsOpen] = useState(true);
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const { welcomed, setWelcomed } = usePageStore((state) => state);
+
+  const handleClose = useCallback(() => {
+    setWelcomed(!welcomed);
+  }, [welcomed]);
+
   return (
-    <Dialog open={isOpen}>
+    <Dialog
+      open={!welcomed}
+      slotProps={{
+        backdrop: {
+          sx: {
+            backdropFilter: 'blur(12px)',
+          },
+        },
+      }}>
       {props.children}
       <DialogActions>
         {props.actions ? props.actions.map((d) => d) : null}

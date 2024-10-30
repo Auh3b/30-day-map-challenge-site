@@ -1,3 +1,4 @@
+import useDayChallenge from '@hooks/useDayChallenge';
 import { Grid2 as Grid, Paper, styled, Tab, Tabs } from '@mui/material';
 import { orange } from '@mui/material/colors';
 import { range } from 'd3';
@@ -58,12 +59,7 @@ const StyledTab = styled((props: StyledTabProps) => (
 
 export default function Footer() {
   return (
-    <Grid
-      // container
-      // direction={'column'}
-      // alignItems={'center'}
-      // justifyContent={'sta'}
-      sx={{ p: 2, maxWidth: { md: 1200, lg: 'unset' } }}>
+    <Grid sx={{ p: 2, maxWidth: { md: 1200, lg: 'unset' } }}>
       <DateSelectorWrapper />
     </Grid>
   );
@@ -85,8 +81,11 @@ function DateSelectorRange() {
 
   const { date, setDate } = usePageStore((state) => state);
 
+  const { setDayChallenge } = useDayChallenge();
+
   const handleChange = (_e: SyntheticEvent, value: number) => {
     setDate(value);
+    setDayChallenge(value);
   };
 
   return (

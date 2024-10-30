@@ -55,7 +55,6 @@ function ThemeChanger() {
     }
     setMode('dark');
   }, [mode]);
-  console.log(mode);
   return (
     <Box
       position={'absolute'}
