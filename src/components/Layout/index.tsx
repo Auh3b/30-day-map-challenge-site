@@ -1,12 +1,5 @@
-import {
-  Box,
-  Divider,
-  Grid2,
-  Paper,
-  Typography,
-  useColorScheme,
-} from '@mui/material';
-import { Fragment, PropsWithChildren, useCallback, useState } from 'react';
+import { Box, useColorScheme } from '@mui/material';
+import { Fragment, PropsWithChildren, useCallback } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';
@@ -17,6 +10,7 @@ import {
   LightModeOutlined,
 } from '@mui/icons-material';
 import DayChallengeDetailsModal from '@components/UI/DayChallengeDetailsModal';
+import usePageStore from '@storesusePageStore';
 
 export default function index() {
   return (
@@ -71,9 +65,9 @@ function ThemeChanger() {
 }
 
 function DetailToggler() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { welcomed, setWelcomed } = usePageStore((state) => state);
   const handleChange = () => {
-    setIsOpen((prev) => !prev);
+    setWelcomed(!welcomed);
   };
   return (
     <Fragment>
@@ -88,47 +82,6 @@ function DetailToggler() {
           <InfoOutlined />
         </SingleModeSwitch>
       </Box>
-      <Box
-        position={'absolute'}
-        top={72 * 0.75}
-        left={16}>
-        {isOpen && <MapDetails />}
-      </Box>
     </Fragment>
-  );
-}
-
-function MapDetails() {
-  return (
-    <Paper sx={{ p: 2 }}>
-      <Grid2
-        container
-        direction={'column'}
-        wrap='nowrap'>
-        <Typography variant={'subtitle2'}>Point of Interest</Typography>
-        <Typography color='primary'>Shops</Typography>
-        <Divider
-          sx={{ my: 1 }}
-          flexItem
-          orientation={'horizontal'}
-        />
-        <Typography variant={'subtitle2'}>Location</Typography>
-        <Typography color='primary'>Lilongwe</Typography>
-        <Divider
-          sx={{ my: 1 }}
-          flexItem
-          orientation={'horizontal'}
-        />
-        <Typography variant={'subtitle2'}>Description</Typography>
-        <Typography color='primary'>Shops within Lilongwe City</Typography>
-        <Divider
-          sx={{ my: 1 }}
-          flexItem
-          orientation={'horizontal'}
-        />
-        <Typography variant={'subtitle2'}>Sources</Typography>
-        <Typography color='primary'>HDX</Typography>
-      </Grid2>
-    </Paper>
   );
 }
