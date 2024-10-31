@@ -1,4 +1,4 @@
-import { Badge, Divider, Grid2, Typography } from '@mui/material';
+import { Divider, Grid2, Typography } from '@mui/material';
 import usePageStore from 'stores/usePageStore';
 
 export default function Header() {
@@ -8,15 +8,11 @@ export default function Header() {
       p={2}
       container
       justifyContent={'space-between'}>
-      <Badge
-        color='secondary'
-        badgeContent={'i'}>
-        <Typography
-          color='primary'
-          variant={'h4'}>
-          {title || '30 Day Map Challenge'}
-        </Typography>
-      </Badge>
+      <Typography
+        color='primary'
+        variant={'h4'}>
+        {title || '30 Day Map Challenge'}
+      </Typography>
       <SelectedDateUI />
     </Grid2>
   );
@@ -32,6 +28,7 @@ function SelectedDateUI() {
         {date}
       </Typography>
       <Divider
+        variant={'middle'}
         sx={{ mx: 1 }}
         flexItem
         orientation={'vertical'}
