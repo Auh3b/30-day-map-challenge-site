@@ -8,3 +8,10 @@ export interface DayChallenge {
 }
 
 export type MapChallenge = DayChallenge[];
+
+export interface MapDescription {
+  poi: string;
+  location: string;
+  context: string;
+  sources: string[];
+}
