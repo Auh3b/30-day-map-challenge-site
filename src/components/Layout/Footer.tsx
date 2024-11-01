@@ -3,6 +3,7 @@ import { Grid2 as Grid, Paper, styled, Tab, Tabs } from '@mui/material';
 import { orange } from '@mui/material/colors';
 import { range } from 'd3';
 import { SyntheticEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import usePageStore from 'stores/usePageStore';
 
 interface StyledTabsProps {
@@ -16,7 +17,7 @@ const StyledTabs = styled((props: StyledTabsProps) => (
     {...props}
     TabIndicatorProps={{ children: <span className='MuiTabs-indicatorSpan' /> }}
   />
-))(({ theme }) => ({
+))(() => ({
   '& .MuiTabs-indicator': {
     top: 0,
     display: 'flex',
@@ -78,7 +79,7 @@ function DateSelectorWrapper() {
 
 function DateSelectorRange() {
   const dates = range(1, 31);
-
+  const nav = useNavigate();
   const { date, setDate } = usePageStore((state) => state);
 
   const { setDayChallenge } = useDayChallenge();
@@ -86,10 +87,12 @@ function DateSelectorRange() {
   const handleChange = (_e: SyntheticEvent, value: number) => {
     setDate(value);
     setDayChallenge(value);
+    nav('/' + value);
   };
 
   return (
     <StyledTabs
+      // @ts-ignore
       variant={'scrollable'}
       scrollButtons='auto'
       value={date}
@@ -97,6 +100,7 @@ function DateSelectorRange() {
       {dates.map((d) => (
         <StyledTab
           key={d}
+          // @ts-ignore
           value={d}
           label={d.toString()}
         />

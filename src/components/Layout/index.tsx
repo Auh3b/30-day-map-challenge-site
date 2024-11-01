@@ -11,6 +11,8 @@ import {
 } from '@mui/icons-material';
 import DayChallengeDetailsModal from '@components/UI/DayChallengeDetailsModal';
 import usePageStore from '@storesusePageStore';
+import { Outlet } from 'react-router-dom';
+import useMapThemeScheme from '@hooks/useMapThemeScheme';
 
 export default function index() {
   return (
@@ -22,6 +24,7 @@ export default function index() {
         <DetailToggler />
       </Content>
       <Footer />
+      <Outlet />
     </Layout>
   );
 }
@@ -40,15 +43,8 @@ function Layout(props: PropsWithChildren) {
 }
 
 function ThemeChanger() {
-  const { mode, setMode } = useColorScheme();
-  const handleModeChange = useCallback(() => {
-    if (!mode) return setMode('dark');
-
-    if (mode === 'dark') {
-      return setMode('light');
-    }
-    setMode('dark');
-  }, [mode]);
+  const { mode, getThemeChanger } = useMapThemeScheme();
+  const handleChange = getThemeChanger();
   return (
     <Box
       position={'absolute'}
@@ -57,7 +53,7 @@ function ThemeChanger() {
       right={16}>
       <SingleModeSwitch
         title='mode'
-        onClick={handleModeChange}>
+        onClick={handleChange}>
         {mode === 'light' ? <LightModeOutlined /> : <DarkModeOutlined />}
       </SingleModeSwitch>
     </Box>
