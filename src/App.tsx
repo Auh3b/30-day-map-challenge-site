@@ -1,10 +1,11 @@
 import 'App.css';
-import Layout from '@components/Layout';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from 'styles/theme';
 import { CssBaseline } from '@mui/material';
 import { useEffect } from 'react';
 import useDayChallenge from '@hooks/useDayChallenge';
+import { RouterProvider } from 'react-router-dom';
+import router from 'routes';
 
 function App() {
   const { setDayChallenge } = useDayChallenge();
@@ -21,7 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Layout />
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
