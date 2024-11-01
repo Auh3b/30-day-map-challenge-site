@@ -3,6 +3,8 @@ import DeckGL, { MapViewState } from 'deck.gl';
 import { Map } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import getLayers from 'layers';
+import useMapStore from '@storesuseMapStore';
+import useBasemap from '@hooks/useBasemap';
 
 const INITIAL_VIEW_STATE: MapViewState = {
   latitude: -13.96692,
@@ -22,11 +24,19 @@ export default function MapContainer() {
         layers={layers}
         controller
         initialViewState={INITIAL_VIEW_STATE}>
-        <Map
-          mapboxAccessToken={accessToken}
-          mapStyle='mapbox://styles/robertchiko/cm2vkgyv100k401pkbusqb00u'
-        />
+        <MapBoxMapLayer />
       </DeckGL>
     </Box>
+  );
+}
+
+function MapBoxMapLayer() {
+  const basemapUrl = useMapStore((state) => state.basemapUrl);
+  useBasemap();
+  return (
+    <Map
+      mapboxAccessToken={accessToken}
+      mapStyle={basemapUrl}
+    />
   );
 }

@@ -1,3 +1,4 @@
+import { Layer, Layers } from 'types/map';
 import { MapDescription } from 'types/data';
 import { create } from 'zustand';
 
@@ -7,7 +8,10 @@ interface MapStore {
   basemapVisible: boolean;
   dataUrl?: string;
   loaded: boolean;
+  layers?: Layers;
   setBasemapVisibility: (value: boolean) => void;
+  setBasemapUrl: (value: string) => void;
+  setLayers: (value: Layer) => void;
 }
 
 const useMapStore = create<MapStore>((set) => ({
@@ -22,6 +26,9 @@ const useMapStore = create<MapStore>((set) => ({
     sources: ['osm', 'map'],
   },
   setBasemapVisibility: (value) => set({ basemapVisible: value }),
+  setBasemapUrl: (value) => set({ basemapUrl: value }),
+  setLayers: (value) =>
+    set(({ layers = [] }) => ({ layers: [...layers, value] })),
 }));
 
 export default useMapStore;
