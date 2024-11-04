@@ -1,5 +1,5 @@
-import { Box, useColorScheme } from '@mui/material';
-import { Fragment, PropsWithChildren, useCallback } from 'react';
+import { Box } from '@mui/material';
+import { Fragment, PropsWithChildren } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Content from './Content';

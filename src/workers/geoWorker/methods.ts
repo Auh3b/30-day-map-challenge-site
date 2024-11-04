@@ -8,7 +8,7 @@ export function setData(params: WorkerParams) {
   return true;
 }
 
-export function getData(params: WorkerParams) {
+export function getData(_params: WorkerParams) {
   if (!data) throw Error('Data not set');
   return data;
 }

@@ -1,4 +1,4 @@
-import { Layer, Layers } from 'types/map';
+import { Layers } from 'types/map';
 import { MapDescription } from 'types/data';
 import { create } from 'zustand';
 import { MapViewState } from 'deck.gl';
