@@ -15,3 +15,17 @@ export interface MapDescription {
   context: string;
   sources: string[];
 }
+
+export interface DayChallengeData {
+  id: string;
+  url: string;
+  title: string;
+  subject: string;
+  location: string;
+  description: string;
+  sources: string[];
+}
+
+export interface MapChallengeData {
+  [k: number]: DayChallengeData;
+}

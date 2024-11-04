@@ -2,7 +2,7 @@ import useDayChallenge from '@hooks/useDayChallenge';
 import { Grid2 as Grid, Paper, styled, Tab, Tabs } from '@mui/material';
 import { orange } from '@mui/material/colors';
 import { range } from 'd3';
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePageStore from 'stores/usePageStore';
 
@@ -80,9 +80,16 @@ function DateSelectorWrapper() {
 function DateSelectorRange() {
   const dates = range(1, 31);
   const nav = useNavigate();
-  const { date, setDate } = usePageStore((state) => state);
+  const { challengeData = {}, date, setDate } = usePageStore((state) => state);
 
   const { setDayChallenge } = useDayChallenge();
+
+  const getActiveTab = useCallback(
+    (index: number) => {
+      return Boolean(challengeData[index]);
+    },
+    [challengeData],
+  );
 
   const handleChange = (_e: SyntheticEvent, value: number) => {
     setDate(value);
@@ -99,6 +106,8 @@ function DateSelectorRange() {
       onChange={handleChange}>
       {dates.map((d) => (
         <StyledTab
+          // @ts-ignore
+          disabled={!getActiveTab(d)}
           key={d}
           // @ts-ignore
           value={d}
