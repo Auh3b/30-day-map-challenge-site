@@ -13,6 +13,7 @@ import DayChallengeDetailsModal from '@components/UI/DayChallengeDetailsModal';
 import usePageStore from '@storesusePageStore';
 import { Outlet } from 'react-router-dom';
 import useMapThemeScheme from '@hooks/useMapThemeScheme';
+import Legend from '@components/common/Map/Legend';
 
 export default function index() {
   return (
@@ -22,6 +23,7 @@ export default function index() {
       <Content>
         <ThemeChanger />
         <DetailToggler />
+        <LegendUI />
       </Content>
       <Footer />
       <Outlet />
@@ -79,5 +81,17 @@ function DetailToggler() {
         </SingleModeSwitch>
       </Box>
     </Fragment>
+  );
+}
+
+function LegendUI() {
+  return (
+    <Box
+      position={'absolute'}
+      bottom={8}
+      zIndex={100}
+      right={16}>
+      <Legend />
+    </Box>
   );
 }
