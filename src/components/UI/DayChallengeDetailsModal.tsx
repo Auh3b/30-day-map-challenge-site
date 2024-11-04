@@ -1,19 +1,17 @@
 import PropertyView from '@components/common/PropertyView';
 import { CalendarTodayOutlined } from '@mui/icons-material';
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Divider,
   Grid2,
   Typography,
 } from '@mui/material';
 import usePageStore from '@storesusePageStore';
-import { MapDescription } from 'types/data';
+import { DayChallengeData } from 'types/data';
 import {
   Fragment,
   PropsWithChildren,
@@ -21,7 +19,6 @@ import {
   useCallback,
   useMemo,
 } from 'react';
-import useMapStore from '@storesuseMapStore';
 
 export default function DayChallengeDetailsModal() {
   return (
@@ -64,19 +61,31 @@ function DetailsModalWrapper(
 }
 
 function DetailsModalContent() {
-  const dsd = usePageStore((state) => state.dayChallenge);
-  const mapProp = useMapStore((state) => state.description);
+  const { dayChallenge, date, challengeData } = usePageStore((state) => state);
+  const mapProp = useMemo(() => {
+    if (!challengeData)
+      return {
+        poi: '',
+        context: '',
+        location: '',
+        sources: [],
+      };
+    return {
+      ...challengeData[date],
+    };
+  }, [challengeData, date]);
+
   return (
     <Fragment>
       <DialogTitle>
         <ModalTitle
-          title={dsd?.name}
-          date={dsd?.date}
+          title={dayChallenge?.name}
+          date={dayChallenge?.date}
         />
       </DialogTitle>
       <DialogContent>
         <ModalContent
-          challenge={dsd?.description}
+          challenge={dayChallenge?.description}
           {...mapProp}
         />
       </DialogContent>
@@ -107,18 +116,18 @@ function ModalTitle(props: ModalTitleProps) {
   );
 }
 
-interface ModalContentProps extends MapDescription {
+interface ModalContentProps extends DayChallengeData {
   challenge?: string;
 }
 
 function ModalContent(props: ModalContentProps) {
-  const { challenge, poi, context, location, sources = [] } = props;
+  const { challenge, subject, description, location, sources = [] } = props;
   const details: null | [string, string, boolean][] = useMemo(() => {
-    if (!poi) return null;
+    if (!subject) return null;
     return [
-      ['Subject', poi, true],
+      ['Subject', subject, true],
       ['Location', location, true],
-      ['Description', context, true],
+      ['Description', description, true],
       ['Sources', sources.join(', '), false],
     ];
   }, []);
