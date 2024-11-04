@@ -1,8 +1,34 @@
 import useMapStore from '@storesuseMapStore';
-import { MapViewState } from 'deck.gl';
+import { MapViewState, PickingInfo } from 'deck.gl';
+
+// interface DataType {
+//   name: string;
+//   [k: string]: string | number;
+// }
+
+interface Tooltip {
+  object?: {
+    html?: string;
+  };
+}
 
 export default function useMapHooks() {
   const { setMapDiv, setViewState } = useMapStore();
+  let isHovering = false;
+  const handleHover = ({ object }: { object: Tooltip['object'] }) =>
+    (isHovering = !!object);
+
+  const handleCursor = ({ isDragging }: { isDragging: boolean }) =>
+    isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
+
+  const handleToolTip = ({ object }: PickingInfo) => {
+    return (
+      object && {
+        html: `<div>${object.properties['NAME']}</div>`,
+      }
+    );
+  };
+
   const handleViewStateChange = ({
     viewState,
   }: {
@@ -13,6 +39,7 @@ export default function useMapHooks() {
 
     setViewState(viewState);
   };
+
   const handleResize = ({
     width,
     height,
@@ -24,6 +51,9 @@ export default function useMapHooks() {
   };
 
   return {
+    handleHover,
+    handleCursor,
+    handleToolTip,
     handleViewStateChange,
     handleResize,
   };
