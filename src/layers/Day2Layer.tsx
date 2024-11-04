@@ -7,14 +7,15 @@ import { GeoJsonLayer } from 'deck.gl';
 import { useEffect, useMemo } from 'react';
 import { getViewport } from 'utils/map';
 
-const day = 1;
+const day = 2;
 
-export default function Day1Layer() {
-  const { challengeData } = usePageStore((state) => state);
+export default function Day2Layer() {
+  const { challengeData, date } = usePageStore((state) => state);
   const { width, height, setViewState } = useMapStore((state) => state);
-  const isVisible = useMapVisibility(day);
-  const isChallengeDataReady = Boolean(challengeData);
   const { handleLayer } = useMapLayer();
+  const isChallengeDataReady = Boolean(challengeData);
+
+  const isVisible = useMapVisibility(day);
 
   useEffect(() => {
     if (isChallengeDataReady) {
@@ -22,10 +23,10 @@ export default function Day1Layer() {
         [day]: {
           name: challengeData[day].id,
           title: challengeData[day].title,
-          visible: isVisible,
           category: 'category',
+          visible: isVisible,
           styles: {
-            colors: ['orange'],
+            colors: ['red'],
             labels: ['Markets'],
           },
         },
@@ -48,7 +49,7 @@ export default function Day1Layer() {
       pointRadiusMinPixels: 3,
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
-      getFillColor: [255, 152, 0],
+      getFillColor: [252, 3, 3],
       onDataLoad: (data, context) => {
         const [minLong, minLat, maxLong, maxLat] = bbox(data);
         const bounds = [
