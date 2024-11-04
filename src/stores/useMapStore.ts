@@ -16,7 +16,7 @@ interface MapStore {
   layers?: Layers;
   setBasemapVisibility: (value: boolean) => void;
   setBasemapUrl: (value: string) => void;
-  setLayers: (value: Layer) => void;
+  setLayer: (value: Layers) => void;
   setMapDiv: (width: number, height: number) => void;
   setViewState: (value: MapViewState) => void;
 }
@@ -37,8 +37,8 @@ const useMapStore = create<MapStore>((set) => ({
   },
   setBasemapVisibility: (value) => set({ basemapVisible: value }),
   setBasemapUrl: (value) => set({ basemapUrl: value }),
-  setLayers: (value) =>
-    set(({ layers = [] }) => ({ layers: [...layers, value] })),
+  setLayer: (value) =>
+    set(({ layers }) => ({ layers: { ...layers, ...value } })),
   setMapDiv: (width, height) => set({ width, height }),
   setViewState: (value) =>
     set((state) => {

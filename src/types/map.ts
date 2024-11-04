@@ -1,6 +1,6 @@
-export type LayerLegendCategory = 'category' | '';
+export type LayerLegendCategory = 'category' | 'gradient';
 
-interface LayerStyle {
+export interface LayerStyle {
   colors: string[];
   labels: string[];
 }
@@ -13,4 +13,6 @@ export interface Layer {
   styles: LayerStyle;
 }
 
-export type Layers = Layer[];
+export interface Layers {
+  [k: number]: Layer;
+}
