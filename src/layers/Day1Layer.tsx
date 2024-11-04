@@ -11,6 +11,7 @@ const day = 1;
 
 export default function Day1Layer() {
   const { challengeData } = usePageStore((state) => state);
+  console.log(challengeData);
   const { width, height, setViewState } = useMapStore((state) => state);
   const isVisible = useMapVisibility(day);
   const isChallengeDataReady = Boolean(challengeData);
@@ -42,6 +43,7 @@ export default function Day1Layer() {
       id: mapDetails.id,
       data: mapDetails.url,
       visible: true,
+      pickable: true,
       pointType: 'circle',
       getPointRadius: 5,
       pointRadiusScale: 1,

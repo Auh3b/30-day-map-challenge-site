@@ -27,7 +27,7 @@ export default function Day2Layer() {
           visible: isVisible,
           styles: {
             colors: ['red'],
-            labels: ['Markets'],
+            labels: ['Rail'],
           },
         },
       });
@@ -43,14 +43,11 @@ export default function Day2Layer() {
       id: mapDetails.id,
       data: mapDetails.url,
       visible: true,
-      pointType: 'circle',
-      getPointRadius: 5,
-      pointRadiusScale: 1,
-      pointRadiusMinPixels: 3,
-      pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
-      getFillColor: [252, 3, 3],
+      getLineWidth: 10,
+      getLineColor: [252, 3, 3],
       onDataLoad: (data, context) => {
+        console.log(data);
         const [minLong, minLat, maxLong, maxLat] = bbox(data);
         const bounds = [
           [minLong, minLat],
