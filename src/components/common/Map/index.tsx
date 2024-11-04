@@ -14,7 +14,13 @@ export default function MapContainer() {
   const layers = getLayers();
   const { viewState, basemapUrl } = useMapStore((state) => state);
   useBasemap();
-  const { handleResize, handleViewStateChange } = useMapHooks();
+  const {
+    handleResize,
+    handleViewStateChange,
+    handleToolTip,
+    handleCursor,
+    handleHover,
+  } = useMapHooks();
   return (
     <Box
       height={'100%'}
@@ -25,9 +31,12 @@ export default function MapContainer() {
         onResize={handleResize}
         // @ts-ignore
         onViewStateChange={handleViewStateChange}
+        getTooltip={handleToolTip}
         viewState={{
           ...viewState,
-        }}>
+        }}
+        onHover={handleHover}
+        getCursor={handleCursor}>
         <Map
           mapboxAccessToken={accessToken}
           mapStyle={basemapUrl}
