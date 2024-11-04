@@ -27,7 +27,7 @@ export default function Day1Layer() {
           category: 'category',
           styles: {
             colors: ['orange'],
-            labels: ['Markets'],
+            labels: ['Health Centers'],
           },
         },
       });
