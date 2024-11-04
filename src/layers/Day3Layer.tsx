@@ -5,12 +5,12 @@ import usePageStore from '@storesusePageStore';
 import { bbox } from '@turf/turf';
 import { GeoJsonLayer } from 'deck.gl';
 import { useEffect, useMemo } from 'react';
-import { getViewport } from 'utils/map';
+import { getViewport, ViewPortBounds } from 'utils/map';
 
 const day = 3;
 
 export default function Day3Layer() {
-  const { challengeData, date } = usePageStore((state) => state);
+  const { challengeData } = usePageStore((state) => state);
   const { width, height, setViewState } = useMapStore((state) => state);
   const { handleLayer } = useMapLayer();
   const isChallengeDataReady = Boolean(challengeData);
@@ -26,7 +26,7 @@ export default function Day3Layer() {
           category: 'category',
           visible: isVisible,
           styles: {
-            colors: ['light green'],
+            colors: ['green'],
             labels: ['Reserve'],
           },
         },
@@ -44,15 +44,18 @@ export default function Day3Layer() {
       data: mapDetails.url,
       visible: true,
       pickable: true,
-      getFillColor: [133, 201, 123],
-      onDataLoad: (data, context) => {
-        console.log(data);
+      getFillColor: [178, 207, 76],
+      onDataLoad: (data) => {
+        //@ts-ignore
         const [minLong, minLat, maxLong, maxLat] = bbox(data);
-        const bounds = [
+
+        const bounds: ViewPortBounds = [
           [minLong, minLat],
           [maxLong, maxLat],
         ];
+
         const viewState = getViewport({ bounds, width, height, padding: 20 });
+
         setViewState(viewState);
       },
     });

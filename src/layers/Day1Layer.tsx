@@ -5,7 +5,7 @@ import usePageStore from '@storesusePageStore';
 import { bbox } from '@turf/turf';
 import { GeoJsonLayer } from 'deck.gl';
 import { useEffect, useMemo } from 'react';
-import { getViewport } from 'utils/map';
+import { getViewport, ViewPortBounds } from 'utils/map';
 
 const day = 1;
 
@@ -51,9 +51,11 @@ export default function Day1Layer() {
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
       getFillColor: [255, 152, 0],
-      onDataLoad: (data, context) => {
+      onDataLoad: (data) => {
+        // @ts-ignore
         const [minLong, minLat, maxLong, maxLat] = bbox(data);
-        const bounds = [
+
+        const bounds: ViewPortBounds = [
           [minLong, minLat],
           [maxLong, maxLat],
         ];
