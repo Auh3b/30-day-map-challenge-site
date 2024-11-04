@@ -35,6 +35,7 @@ export default function MapContainer() {
         viewState={{
           ...viewState,
         }}
+        // @ts-ignore
         onHover={handleHover}
         getCursor={handleCursor}>
         <Map

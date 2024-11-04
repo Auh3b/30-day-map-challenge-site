@@ -65,10 +65,13 @@ function DetailsModalContent() {
   const mapProp = useMemo(() => {
     if (!challengeData)
       return {
-        poi: '',
-        context: '',
-        location: '',
         sources: [],
+        id: '',
+        url: '',
+        title: '',
+        subject: '',
+        location: '',
+        description: '',
       };
     return {
       ...challengeData[date],
