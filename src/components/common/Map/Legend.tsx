@@ -84,7 +84,14 @@ function CategoryIcon(props: LayerStyle) {
           container
           gap={3}
           key={label}>
-          <Box sx={{ width: 10, height: 10, background: color }}></Box>
+          <Box
+            sx={{
+              border: '1px black solid',
+              borderRadius: '100%',
+              width: 10,
+              height: 10,
+              background: color,
+            }}></Box>
           <Typography variant={'overline'}>{label}</Typography>
         </Grid2>
       ))}
