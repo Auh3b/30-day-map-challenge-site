@@ -6,8 +6,10 @@ export const INITIAL_VIEW_STATE: MapViewState = {
   zoom: 2,
 };
 
+export type ViewPortBounds = [[number, number], [number, number]];
+
 interface ViewPortProps {
-  bounds: [[number, number], [number, number]];
+  bounds: ViewPortBounds;
   width: number;
   height: number;
   padding?: number;
