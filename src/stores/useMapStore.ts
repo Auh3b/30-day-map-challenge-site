@@ -3,6 +3,7 @@ import { MapDescription } from 'types/data';
 import { create } from 'zustand';
 import { MapViewState } from 'deck.gl';
 import { INITIAL_VIEW_STATE } from 'utils/map';
+import { MAP_STYLE_NAMES, MAP_STYLES } from 'styles/mapStyles';
 
 interface MapStore {
   width: number;
@@ -24,7 +25,7 @@ interface MapStore {
 const useMapStore = create<MapStore>((set) => ({
   width: 0,
   height: 0,
-  basemapUrl: 'mapbox://styles/robertchiko/cm2vkgyv100k401pkbusqb00u',
+  basemapUrl: MAP_STYLES[MAP_STYLE_NAMES.DARK],
   basemapVisible: true,
   loaded: false,
   dataUrl: '',
