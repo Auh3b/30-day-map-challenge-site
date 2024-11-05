@@ -78,6 +78,8 @@ function DetailsModalContent() {
     };
   }, [challengeData, date]);
 
+  console.log(mapProp);
+
   return (
     <Fragment>
       <DialogTitle>
@@ -113,7 +115,7 @@ function ModalTitle(props: ModalTitleProps) {
         container
         gap={1}>
         <CalendarTodayOutlined fontSize={'small'} />
-        <Typography variant='h6'>{date}</Typography>
+        <Typography>{date}</Typography>
       </Grid2>
     </Grid2>
   );
@@ -133,7 +135,7 @@ function ModalContent(props: ModalContentProps) {
       ['Description', description, true],
       ['Sources', sources.join(', '), false],
     ];
-  }, []);
+  }, [props]);
   return (
     <Grid2
       container
