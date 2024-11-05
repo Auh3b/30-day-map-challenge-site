@@ -78,8 +78,6 @@ function DetailsModalContent() {
     };
   }, [challengeData, date]);
 
-  console.log(mapProp);
-
   return (
     <Fragment>
       <DialogTitle>

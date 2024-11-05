@@ -81,7 +81,6 @@ export default function Day4Layer() {
     },
     [range],
   );
-  // console.log(range);
 
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
