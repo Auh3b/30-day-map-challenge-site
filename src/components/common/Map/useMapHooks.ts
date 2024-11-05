@@ -21,12 +21,11 @@ export default function useMapHooks() {
   const handleCursor = ({ isDragging }: { isDragging: boolean }) =>
     isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
 
-  const handleToolTip = ({ object }: PickingInfo) => {
-    return (
-      object && {
-        html: `<div>${object.properties['NAME']}</div>`,
-      }
-    );
+  const handleToolTip = (info: PickingInfo) => {
+    if (info?.object?.html)
+      return {
+        html: `<div>${info.object.html}</div>`,
+      };
   };
 
   const handleViewStateChange = ({
