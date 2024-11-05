@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 import Layout from '@components/Layout';
 import Day from '@components/Pages/Day';
 
@@ -12,6 +12,10 @@ const routes: RouteObject[] = [
         element: <Day />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <Navigate to={'/'} />,
   },
 ];
 
