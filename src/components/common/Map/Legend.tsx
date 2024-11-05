@@ -1,10 +1,23 @@
-import { Box, Grid2, Paper, Typography } from '@mui/material';
+import { UnfoldLessRounded, UnfoldMoreRounded } from '@mui/icons-material';
+import {
+  Box,
+  Collapse,
+  Divider,
+  Grid2,
+  IconButton,
+  Paper,
+  Typography,
+} from '@mui/material';
 import useMapStore from '@storesuseMapStore';
 import { zip } from 'd3';
-import { Fragment, useMemo } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { Layer, LayerStyle } from 'types/map';
 
 export default function Legend() {
+  const [isOpen, setIsOpen] = useState(true);
+  const handleOpen = () => {
+    setIsOpen((value) => !value);
+  };
   const _layers = useMapStore((state) => state.layers);
   const layers = useMemo(() => {
     if (!_layers) return [];
@@ -12,20 +25,51 @@ export default function Legend() {
   }, [_layers]);
 
   return (
-    <Paper sx={{ p: 2 }}>
+    <Paper sx={{ p: 2, width: '100%' }}>
+      <LegendTitle
+        isOpen={isOpen}
+        handleOpen={handleOpen}
+      />
+      <Divider
+        sx={{ mb: 2, display: isOpen ? 'block' : 'none' }}
+        orientation='horizontal'
+      />
+      <Collapse in={isOpen}>
+        {layers.map((d, i) => (
+          <LegendItem
+            key={`legend-item-${i}`}
+            {...d}
+          />
+        ))}
+      </Collapse>
+    </Paper>
+  );
+}
+
+interface LegendTitleProps {
+  isOpen: boolean;
+  handleOpen: () => void;
+}
+
+function LegendTitle(props: LegendTitleProps) {
+  const { isOpen, handleOpen } = props;
+  return (
+    <Grid2
+      container
+      alignContent={'center'}
+      justifyContent={'space-between'}>
       <Typography
         fontStyle={'italic'}
-        variant={'body2'}
-        sx={{ mb: 2 }}>
+        variant={'subtitle1'}
+        sx={{ alignSelf: 'center' }}>
         Legend
       </Typography>
-      {layers.map((d, i) => (
-        <LegendItem
-          key={`legend-item-${i}`}
-          {...d}
-        />
-      ))}
-    </Paper>
+      <IconButton
+        size='small'
+        onClick={handleOpen}>
+        {isOpen ? <UnfoldLessRounded /> : <UnfoldMoreRounded />}
+      </IconButton>
+    </Grid2>
   );
 }
 
@@ -35,7 +79,11 @@ function LegendItem(props: Layer) {
     <Fragment>
       {visible && (
         <Box>
-          <Typography variant={'caption'}>{title}</Typography>
+          <Typography
+            sx={{ mb: 1, display: 'block' }}
+            variant={'overline'}>
+            {title}
+          </Typography>
           {category === 'category' ? (
             <CategoryIcon {...styles} />
           ) : (
@@ -52,10 +100,13 @@ function GradientIcon(props: LayerStyle) {
   return (
     <Grid2
       container
+      gap={1}
       direction={'column'}>
       <Box
         sx={{
-          backgroundImage: `linear-gradient(to left ${colors[0]} ${colors[1]})`,
+          borderRadius: 24,
+          height: 10,
+          backgroundImage: `linear-gradient(to right, ${colors[0]}, ${colors[1]})`,
         }}></Box>
       <Grid2
         justifyContent={'space-between'}
@@ -63,7 +114,7 @@ function GradientIcon(props: LayerStyle) {
         container>
         {labels.map((t) => (
           <Typography
-            variant={'overline'}
+            variant={'caption'}
             key={t}>
             {t}
           </Typography>
@@ -92,7 +143,7 @@ function CategoryIcon(props: LayerStyle) {
               height: 10,
               background: color,
             }}></Box>
-          <Typography variant={'overline'}>{label}</Typography>
+          <Typography variant={'caption'}>{label}</Typography>
         </Grid2>
       ))}
     </Grid2>
