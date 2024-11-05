@@ -80,5 +80,14 @@ export default function Day5Layer() {
       onDataLoad: () => {
         setViewState({ latitude, longitude, zoom, pitch: 45 });
       },
+      onHover: (value) => {
+        console.log(value);
+        if (value.object) {
+          value.object.html = `<div>
+            <p>${value.object['NAME']}</p>
+          </div>`;
+        }
+      },
+      pickable: true,
     });
 }
