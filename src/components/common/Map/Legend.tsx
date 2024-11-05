@@ -106,7 +106,7 @@ function GradientIcon(props: LayerStyle) {
         sx={{
           borderRadius: 24,
           height: 10,
-          backgroundImage: `linear-gradient(to right, ${colors[0]}, ${colors[1]})`,
+          backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
         }}></Box>
       <Grid2
         justifyContent={'space-between'}
