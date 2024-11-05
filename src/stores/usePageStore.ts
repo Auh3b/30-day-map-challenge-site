@@ -18,7 +18,7 @@ const usePageStore = create<PageStore>((set) => ({
   welcomed: false,
   date: 1,
   dayChallenge: null,
-  theme: 'light',
+  theme: 'dark',
   setDate: (value) => set(() => ({ date: value })),
   setTheme: (value) => set(() => ({ theme: value })),
   setDayChallengeInfo: (value) => set({ dayChallenge: value }),
