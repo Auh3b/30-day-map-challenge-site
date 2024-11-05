@@ -14,8 +14,10 @@ import usePageStore from '@storesusePageStore';
 import { Outlet } from 'react-router-dom';
 import useMapThemeScheme from '@hooks/useMapThemeScheme';
 import Legend from '@components/common/Map/Legend';
+import useChallengeData from '@hooks/useChallengeData';
 
 export default function index() {
+  useChallengeData();
   return (
     <Layout>
       <DayChallengeDetailsModal />

@@ -4,11 +4,8 @@ import theme from 'styles/theme';
 import { CssBaseline } from '@mui/material';
 import { RouterProvider } from 'react-router-dom';
 import router from 'routes';
-import useChallengeData from '@hooks/useChallengeData';
 
 function App() {
-  useChallengeData();
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
