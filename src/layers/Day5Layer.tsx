@@ -1,6 +1,6 @@
 import useMapLayer from '@hooks/useMapLayer';
 import useMapVisibility from '@hooks/useMapVisibility';
-// import useMapStore from '@storesuseMapStore';
+import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
 import { ArcLayer } from 'deck.gl';
 import { useEffect, useMemo } from 'react';
@@ -31,7 +31,10 @@ function getCoordinate(
 export default function Day5Layer() {
   const { challengeData } = usePageStore((state) => state);
 
-  // const { setViewState } = useMapStore((state) => state);
+  const {
+    viewState: { latitude, longitude, zoom },
+    setViewState,
+  } = useMapStore((state) => state);
 
   const { handleLayer } = useMapLayer();
 
@@ -74,6 +77,8 @@ export default function Day5Layer() {
       // @ts-ignore
       getTargetColor: d32DeckglColor(colors[1]),
       visible: true,
-      // onDataLoad: (data) => {},
+      onDataLoad: () => {
+        setViewState({ latitude, longitude, zoom, pitch: 45 });
+      },
     });
 }

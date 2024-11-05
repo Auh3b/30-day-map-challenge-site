@@ -54,7 +54,7 @@ export default function Day2Layer() {
           [maxLong, maxLat],
         ];
         const viewState = getViewport({ bounds, width, height, padding: 20 });
-        setViewState(viewState);
+        setViewState({ ...viewState, pitch: 0 });
       },
     });
 }
