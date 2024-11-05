@@ -89,6 +89,7 @@ function DetailToggler() {
 function LegendUI() {
   return (
     <Box
+      minWidth={(theme) => theme.spacing(30)}
       position={'absolute'}
       bottom={8}
       zIndex={100}
