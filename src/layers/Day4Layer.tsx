@@ -1,5 +1,6 @@
 import useMapLayer from '@hooks/useMapLayer';
 import useMapVisibility from '@hooks/useMapVisibility';
+import { orange, red } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
 import { extent, scaleLinear } from 'd3';
@@ -30,7 +31,7 @@ const getColorScale = (num: NumRange, colors: TextRange) => {
   return scaleLinear(num, colors);
 };
 
-const colors = ['orange', 'red'];
+const colors = [orange[500], red[500]];
 
 export default function Day4Layer() {
   const [range, setRange] = useState<null | NumRange>(null);
@@ -97,13 +98,21 @@ export default function Day4Layer() {
       getElevation: (d) => d.sum,
       // @ts-ignore
       getFillColor: (d) => handleColor(d.sum),
-      getLineColor: [0, 0, 0],
+      getLineColor: [255, 255, 255],
       lineWidthUnits: 'pixels',
-      getLineWidth: 1,
-      wireframe: true,
+      getLineWidth: 0.1,
+      // wireframe: true,
       onDataLoad: (data) => {
         handleRange(data as HexDataType);
         setViewState({ latitude, longitude, zoom, pitch: 45 });
       },
+      onHover: (value) => {
+        if (value.object) {
+          value.object.html = `<div>
+            <p>${Math.floor(value.object['sum'])}</p>
+          </div>`;
+        }
+      },
+      pickable: true,
     });
 }

@@ -1,5 +1,6 @@
 import useMapLayer from '@hooks/useMapLayer';
 import useMapVisibility from '@hooks/useMapVisibility';
+import { orange, red } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
 import { ArcLayer } from 'deck.gl';
@@ -17,7 +18,7 @@ interface ArcRow {
   visited: boolean;
 }
 
-const colors = ['orange', 'red'];
+const colors = [orange[500], red[500]];
 
 function getCoordinate(
   row: Omit<ArcRow, 'dist_name' | 'visited'>,
@@ -81,7 +82,6 @@ export default function Day5Layer() {
         setViewState({ latitude, longitude, zoom, pitch: 45 });
       },
       onHover: (value) => {
-        console.log(value);
         if (value.object) {
           value.object.html = `<div>
             <p>${value.object['NAME']}</p>
