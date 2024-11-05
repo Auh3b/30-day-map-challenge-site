@@ -8,7 +8,6 @@ import useBasemap from '@hooks/useBasemap';
 import useMapHooks from './useMapHooks';
 
 const accessToken = import.meta.env.VITE_MAPBOX_ACCESSTOKEN;
-// const transitionInterpolator = new LinearInterpolator();
 
 export default function MapContainer() {
   const layers = getLayers();

@@ -1,3 +1,5 @@
+import { Fragment } from 'react/jsx-runtime';
+
 export default function index() {
-  return null;
+  return <Fragment></Fragment>;
 }
