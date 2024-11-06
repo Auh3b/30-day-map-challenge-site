@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from "react";
-import { BitmapLayer } from "deck.gl";
-import useMapVisibility from "@hooks/useMapVisibility";
-import useMapLayer from "@hooks/useMapLayer";
-import useMapStore from "@storesuseMapStore";
-import usePageStore from "@storesusePageStore";
+import { useEffect, useMemo } from 'react';
+import { BitmapLayer } from 'deck.gl';
+import useMapVisibility from '@hooks/useMapVisibility';
+import useMapLayer from '@hooks/useMapLayer';
+import useMapStore from '@storesuseMapStore';
+import usePageStore from '@storesusePageStore';
 
 type RasterLayerBounds = [number, number, number, number];
 
@@ -32,11 +32,11 @@ export default function Day6Layer() {
         [day]: {
           name: challengeData[day].id,
           title: challengeData[day].title,
-          category: "gradient",
+          category: 'image',
           visible: isVisible,
           styles: {
             colors: [],
-            labels: ["Malawi"],
+            labels: ['Malawi'],
           },
         },
       });
@@ -47,7 +47,7 @@ export default function Day6Layer() {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (isChallengeDataReady && mapDetails)
+  if (isVisible && mapDetails)
     return new BitmapLayer({
       id: mapDetails.id,
       image: mapDetails.url,
