@@ -1,4 +1,4 @@
-export type LayerLegendCategory = 'category' | 'gradient';
+export type LayerLegendCategory = "category" | "gradient" | "image";
 
 export interface LayerStyle {
   colors: string[];
