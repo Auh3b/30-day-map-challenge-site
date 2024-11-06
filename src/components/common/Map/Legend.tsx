@@ -1,4 +1,8 @@
-import { UnfoldLessRounded, UnfoldMoreRounded } from '@mui/icons-material';
+import {
+  ImageRounded,
+  UnfoldLessRounded,
+  UnfoldMoreRounded,
+} from '@mui/icons-material';
 import {
   Box,
   Collapse,
@@ -10,8 +14,14 @@ import {
 } from '@mui/material';
 import useMapStore from '@storesuseMapStore';
 import { zip } from 'd3';
-import { Fragment, useMemo, useState } from 'react';
-import { Layer, LayerStyle } from 'types/map';
+import {
+  Fragment,
+  JSXElementConstructor,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
+import { Layer, LayerLegendCategory, LayerStyle } from 'types/map';
 
 export default function Legend() {
   const [isOpen, setIsOpen] = useState(true);
@@ -75,6 +85,20 @@ function LegendTitle(props: LegendTitleProps) {
 
 function LegendItem(props: Layer) {
   const { title, category, visible, styles } = props;
+  const getLegend = useCallback(() => {
+    const legendTypes = new Map<
+      LayerLegendCategory,
+      JSXElementConstructor<LayerStyle>
+    >([
+      ['category', CategoryIcon],
+      ['gradient', GradientIcon],
+      ['image', ImageIcon],
+    ]);
+    const element = legendTypes.get(category);
+    return element;
+  }, [category, styles]);
+
+  const LegendIcon = getLegend();
   return (
     <Fragment>
       {visible && (
@@ -84,11 +108,7 @@ function LegendItem(props: Layer) {
             variant={'overline'}>
             {title}
           </Typography>
-          {category === 'category' ? (
-            <CategoryIcon {...styles} />
-          ) : (
-            <GradientIcon {...styles} />
-          )}
+          <LegendIcon {...styles} />
         </Box>
       )}
     </Fragment>
@@ -144,6 +164,24 @@ function CategoryIcon(props: LayerStyle) {
               background: color,
             }}></Box>
           <Typography variant={'caption'}>{label}</Typography>
+        </Grid2>
+      ))}
+    </Grid2>
+  );
+}
+
+function ImageIcon(props: LayerStyle) {
+  const { labels } = props;
+  return (
+    <Grid2>
+      {labels.map((d) => (
+        <Grid2
+          key={d}
+          container
+          gap={3}
+          alignItems={'center'}>
+          <ImageRounded />
+          <Typography>{d}</Typography>
         </Grid2>
       ))}
     </Grid2>
