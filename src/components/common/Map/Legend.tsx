@@ -83,22 +83,23 @@ function LegendTitle(props: LegendTitleProps) {
   );
 }
 
+const legendTypes = new Map<
+  LayerLegendCategory,
+  JSXElementConstructor<LayerStyle>
+>([
+  ['category', CategoryIcon],
+  ['gradient', GradientIcon],
+  ['image', ImageIcon],
+]);
+
 function LegendItem(props: Layer) {
   const { title, category, visible, styles } = props;
-  const getLegend = useCallback(() => {
-    const legendTypes = new Map<
-      LayerLegendCategory,
-      JSXElementConstructor<LayerStyle>
-    >([
-      ['category', CategoryIcon],
-      ['gradient', GradientIcon],
-      ['image', ImageIcon],
-    ]);
+
+  const LegendIcon = useMemo(() => {
     const element = legendTypes.get(category);
     return element;
   }, [category, styles]);
 
-  const LegendIcon = getLegend();
   return (
     <Fragment>
       {visible && (
