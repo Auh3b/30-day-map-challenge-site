@@ -14,13 +14,7 @@ import {
 } from '@mui/material';
 import useMapStore from '@storesuseMapStore';
 import { zip } from 'd3';
-import {
-  Fragment,
-  JSXElementConstructor,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import { Fragment, JSXElementConstructor, useMemo, useState } from 'react';
 import { Layer, LayerLegendCategory, LayerStyle } from 'types/map';
 
 export default function Legend() {
