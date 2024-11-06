@@ -5,7 +5,12 @@ import useMapLayer from "@hooks/useMapLayer";
 import useMapStore from "@storesuseMapStore";
 import usePageStore from "@storesusePageStore";
 
+type RasterLayerBounds = [number, number, number, number];
+
 const day = 6;
+const bounds: RasterLayerBounds = [
+  32.671527767, -17.127083322, 35.9148611, -9.364027767,
+];
 
 export default function Day6Layer() {
   const { challengeData } = usePageStore((state) => state);
@@ -46,7 +51,7 @@ export default function Day6Layer() {
     return new BitmapLayer({
       id: mapDetails.id,
       image: mapDetails.url,
-      bounds: [0, 0, 0, 0],
+      bounds,
       onDataLoad: () => {
         setViewState({ latitude, longitude, zoom });
       },
