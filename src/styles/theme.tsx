@@ -36,14 +36,8 @@ const theme = createTheme({
     subtitle1: {
       fontFamily: 'Playfair Display',
     },
-    subtitle2: {
-      fontFamily: 'Playfair Display',
-    },
     body1: {
       fontFamily: 'Roboto Condensed',
-    },
-    body2: {
-      fontFamily: 'Playfair Display',
     },
   },
 });

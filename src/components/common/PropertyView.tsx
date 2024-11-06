@@ -13,11 +13,7 @@ export default function PropertyView(props: PropertyViewProps) {
       container
       direction={'column'}
       wrap='nowrap'>
-      <Typography
-        fontStyle={'italic'}
-        variant='subtitle2'>
-        {name}:
-      </Typography>
+      <Typography variant='subtitle2'>{name}:</Typography>
       <Typography color='primary'>{value}</Typography>
       <Divider
         orientation='horizontal'

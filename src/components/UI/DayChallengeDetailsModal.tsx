@@ -10,6 +10,7 @@ import {
   Grid2,
   Typography,
 } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import usePageStore from '@storesusePageStore';
 import { DayChallengeData } from 'types/data';
 import {
@@ -19,6 +20,7 @@ import {
   useCallback,
   useMemo,
 } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 export default function DayChallengeDetailsModal() {
   return (
@@ -124,38 +126,37 @@ interface ModalContentProps extends DayChallengeData {
 }
 
 function ModalContent(props: ModalContentProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { challenge, subject, description, location, sources = [] } = props;
   const details: null | [string, string, boolean][] = useMemo(() => {
     if (!subject) return null;
     return [
-      ['Subject', subject, true],
-      ['Location', location, true],
-      ['Description', description, true],
+      ['Subject', subject, !isMobile],
+      ['Location', location, !isMobile],
+      ['Description', description, !isMobile],
       ['Sources', sources.join(', '), false],
     ];
-  }, [props]);
+  }, [props, isMobile]);
   return (
     <Grid2
       container
+      direction={isMobile ? 'column' : 'row'}
       wrap='nowrap'>
-      <Grid2 size={5}>
-        <Typography
-          sx={{ mb: 1 }}
-          fontStyle={'italic'}
-          variant='subtitle2'>
-          Challenge
-        </Typography>
+      <Grid2 size={isMobile ? 12 : 5}>
+        <ModalContentSectionTitle>Challenge</ModalContentSectionTitle>
         <Typography>{challenge}</Typography>
       </Grid2>
       {details && (
         <>
           <Divider
-            sx={{ mx: 2 }}
+            sx={{ mx: isMobile ? 0 : 2, my: isMobile ? 2 : 0 }}
             flexItem
-            orientation='vertical'
+            orientation={isMobile ? 'horizontal' : 'vertical'}
           />
 
-          <Grid2 size={5}>
+          <Grid2 size={isMobile ? 12 : 5}>
+            <ModalContentSectionTitle>Attempt</ModalContentSectionTitle>
             <MapDataModalContent details={details} />
           </Grid2>
         </>
@@ -180,5 +181,16 @@ function MapDataModalContent(props: MapDataModalContentProps) {
         />
       ))}
     </>
+  );
+}
+
+function ModalContentSectionTitle(props: PropsWithChildren) {
+  return (
+    <Typography
+      fontStyle={'italic'}
+      variant='subtitle1'
+      sx={{ mb: 1 }}>
+      {props.children}
+    </Typography>
   );
 }
