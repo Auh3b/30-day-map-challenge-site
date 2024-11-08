@@ -8,12 +8,10 @@ import { getViewport, ViewPortBounds } from 'utils/map';
 
 type RasterLayerBounds = [number, number, number, number];
 
-const day = 6;
-const bounds: RasterLayerBounds = [
-  32.671527767, -17.127083322, 35.9148611, -9.364027767,
-];
+const day = 7;
+const bounds: RasterLayerBounds = [34.586, -12.149, 34.818, -11.985];
 
-export default function Day6Layer() {
+export default function Day7Layer() {
   const { challengeData } = usePageStore((state) => state);
 
   const { width, height, viewState, setViewState } = useMapStore(
@@ -41,10 +39,11 @@ export default function Day6Layer() {
         },
       });
     }
+
     if (isVisible) {
       const bounds: ViewPortBounds = [
-        [32.671527767, -17.127083322],
-        [35.9148611, -9.364027767],
+        [34.586, -12.149],
+        [34.818, -11.985],
       ];
       const { latitude, longitude, zoom } = getViewport({
         bounds,
@@ -65,5 +64,20 @@ export default function Day6Layer() {
       id: mapDetails.id,
       image: mapDetails.url,
       bounds,
+      loadOptions: {},
+      onDataLoad: (data, context) => {
+        console.log(data, context);
+        const bounds: ViewPortBounds = [
+          [34.586, -12.149],
+          [34.818, -11.985],
+        ];
+        const { latitude, longitude, zoom } = getViewport({
+          bounds,
+          width,
+          height,
+          padding: 20,
+        });
+        setViewState({ ...viewState, latitude, longitude, zoom });
+      },
     });
 }
