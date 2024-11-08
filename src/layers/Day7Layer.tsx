@@ -34,7 +34,7 @@ export default function Day7Layer() {
           visible: isVisible,
           styles: {
             colors: [],
-            labels: ['Malawi'],
+            labels: ['Likoma Island'],
           },
         },
       });
