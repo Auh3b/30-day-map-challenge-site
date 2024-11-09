@@ -3,10 +3,11 @@ import useMapVisibility from '@hooks/useMapVisibility';
 import { orange, red } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
-import { extent, scaleLinear } from 'd3';
+import { scaleLinear } from 'd3';
 import { H3HexagonLayer } from 'deck.gl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { d32DeckglColor } from 'utils/conversions';
+import { getRange } from 'utils/data';
 
 const day = 4;
 
@@ -22,10 +23,6 @@ type NumRange = number[];
 type TextRange = string[];
 
 type HexDataType = HexRow[];
-
-const getRange = (data: HexDataType, column: keyof Omit<HexRow, 'h3_code'>) => {
-  return extent(data, (d) => d[column]);
-};
 
 const getColorScale = (num: NumRange, colors: TextRange) => {
   return scaleLinear(num, colors);
@@ -113,5 +110,8 @@ export default function Day4Layer() {
         }
       },
       pickable: true,
+      updateTriggers: {
+        getFillColor: range,
+      },
     });
 }
