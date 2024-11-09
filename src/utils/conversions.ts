@@ -1,9 +1,9 @@
 import { color, rgb, scaleLinear } from 'd3';
 
-export function d32DeckglColor(value: string): number[] {
+export function d32DeckglColor(value: string, opacity?: number): number[] {
   const colorObject = color(value);
   const [red, green, blue, alpha] = Object.values(colorObject.rgb());
-  return [red, green, blue, alphaOn255Scale(alpha)];
+  return [red, green, blue, opacity ?? alphaOn255Scale(alpha)];
 }
 
 function alphaOn255Scale(value: number): number {
