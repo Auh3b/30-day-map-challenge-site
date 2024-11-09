@@ -5,6 +5,7 @@ import Day4Layer from './Day4Layer';
 import Day5Layer from './Day5Layer';
 import Day6Layer from './Day6Layer';
 import Day7Layer from './Day7Layer';
+import Day8Layer from './Day8Layer';
 
 const getLayers = () => {
   return [
@@ -15,6 +16,7 @@ const getLayers = () => {
     Day5Layer(),
     Day6Layer(),
     Day7Layer(),
+    Day8Layer(),
   ];
 };
 
