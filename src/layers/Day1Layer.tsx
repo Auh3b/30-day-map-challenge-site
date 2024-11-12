@@ -1,5 +1,5 @@
 import useMapLayer from '@hooks/useMapLayer';
-import useMapVisibility from '@hooks/useMapVisibility';
+import { orange } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
 import { bbox } from '@turf/turf';
@@ -11,37 +11,32 @@ const day = 1;
 
 export default function Day1Layer() {
   const { challengeData } = usePageStore((state) => state);
-  const { width, height, setViewState } = useMapStore((state) => state);
-  const isVisible = useMapVisibility(day);
-  const isChallengeDataReady = Boolean(challengeData);
-  const { handleLayer } = useMapLayer();
 
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
+  const { width, height, setViewState } = useMapStore((state) => state);
+  const isLoaded = getLayerLoad(day);
+  const visible = getLayerVisibility(day);
   useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          visible: isVisible,
-          category: 'category',
-          styles: {
-            colors: ['orange'],
-            labels: ['Health Centers'],
-          },
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        category: 'category',
+        visible: true,
+        styles: {
+          colors: [orange[500]],
+          labels: ['Displace Population'],
         },
       });
     }
-  }, [isVisible, isChallengeDataReady]);
-
+  }, [isLoaded]);
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (mapDetails && isVisible)
+  if (mapDetails && isLoaded)
     return new GeoJsonLayer({
       id: mapDetails.id,
       data: mapDetails.url,
-      visible: true,
+      visible,
       pickable: true,
       pointType: 'circle',
       getPointRadius: 5,
@@ -60,6 +55,9 @@ export default function Day1Layer() {
         ];
         const viewState = getViewport({ bounds, width, height, padding: 20 });
         setViewState({ ...viewState, pitch: 0 });
+      },
+      updateTriggers: {
+        visible,
       },
     });
 }

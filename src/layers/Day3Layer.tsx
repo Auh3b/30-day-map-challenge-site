@@ -1,5 +1,4 @@
 import useMapLayer from '@hooks/useMapLayer';
-import useMapVisibility from '@hooks/useMapVisibility';
 import { green } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
@@ -14,38 +13,32 @@ const colors = [green[500]];
 
 export default function Day3Layer() {
   const { challengeData } = usePageStore((state) => state);
+
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
   const { width, height, setViewState } = useMapStore((state) => state);
-  const { handleLayer } = useMapLayer();
-  const isChallengeDataReady = Boolean(challengeData);
 
-  const isVisible = useMapVisibility(day);
-
+  const isLoaded = getLayerLoad(day);
+  const visible = getLayerVisibility(day);
   useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          category: 'category',
-          visible: isVisible,
-          styles: {
-            colors,
-            labels: ['Reserve'],
-          },
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        visible: true,
+        styles: {
+          colors,
+          labels: ['National Reserve'],
         },
       });
     }
-  }, [isVisible, isChallengeDataReady]);
-
+  }, [isLoaded]);
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (mapDetails && isVisible)
+  if (mapDetails && isLoaded)
     return new GeoJsonLayer({
       id: mapDetails.id,
       data: mapDetails.url,
-      visible: true,
+      visible,
       stroked: true,
       pickable: true,
       // @ts-ignore
@@ -69,6 +62,9 @@ export default function Day3Layer() {
             <p>${value.object.properties['NAME']}</p>
           </div>`;
         }
+      },
+      updateTriggers: {
+        visible,
       },
     });
 }

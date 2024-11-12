@@ -1,5 +1,5 @@
 import useMapLayer from '@hooks/useMapLayer';
-import useMapVisibility from '@hooks/useMapVisibility';
+import { orange } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
 import { bbox } from '@turf/turf';
@@ -11,38 +11,36 @@ const day = 2;
 
 export default function Day2Layer() {
   const { challengeData } = usePageStore((state) => state);
-  const { width, height, setViewState } = useMapStore((state) => state);
-  const { handleLayer } = useMapLayer();
-  const isChallengeDataReady = Boolean(challengeData);
 
-  const isVisible = useMapVisibility(day);
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
+
+  const { width, height, setViewState } = useMapStore((state) => state);
+
+  const isLoaded = getLayerLoad(day);
+  const visible = getLayerVisibility(day);
 
   useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          category: 'category',
-          visible: isVisible,
-          styles: {
-            colors: ['orange'],
-            labels: ['Rail'],
-          },
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        category: 'category',
+        visible: true,
+        styles: {
+          colors: [orange[500]],
+          labels: ['Rail Way'],
         },
       });
     }
-  }, [isVisible, isChallengeDataReady]);
+  }, [isLoaded]);
 
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (mapDetails && isVisible)
+  if (mapDetails && isLoaded)
     return new GeoJsonLayer({
       id: mapDetails.id,
       data: mapDetails.url,
-      visible: true,
+      visible,
       lineWidthUnits: 'pixels',
       getLineWidth: 1,
       getLineColor: [255, 152, 0],
@@ -55,6 +53,9 @@ export default function Day2Layer() {
         ];
         const viewState = getViewport({ bounds, width, height, padding: 20 });
         setViewState({ ...viewState, pitch: 0 });
+      },
+      updateTriggers: {
+        visible,
       },
     });
 }

@@ -2,6 +2,8 @@ import {
   ImageRounded,
   UnfoldLessRounded,
   UnfoldMoreRounded,
+  VisibilityOffRounded,
+  VisibilityRounded,
 } from '@mui/icons-material';
 import {
   Box,
@@ -10,6 +12,7 @@ import {
   Grid2,
   IconButton,
   Paper,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import useMapStore from '@storesuseMapStore';
@@ -23,8 +26,10 @@ export default function Legend() {
     setIsOpen((value) => !value);
   };
   const _layers = useMapStore((state) => state.layers);
+  console.log(_layers);
   const layers = useMemo(() => {
     if (!_layers) return [];
+
     return Object.values(_layers);
   }, [_layers]);
 
@@ -87,7 +92,13 @@ const legendTypes = new Map<
 ]);
 
 function LegendItem(props: Layer) {
-  const { title, category, visible, styles } = props;
+  const {
+    id,
+    title,
+    category = 'category',
+    visible,
+    styles = { colors: [], labels: [] },
+  } = props;
 
   const LegendIcon = useMemo(() => {
     const element = legendTypes.get(category);
@@ -96,16 +107,27 @@ function LegendItem(props: Layer) {
 
   return (
     <Fragment>
-      {visible && (
-        <Box>
-          <Typography
-            sx={{ mb: 1, display: 'block' }}
-            variant={'overline'}>
-            {title}
-          </Typography>
+      <Grid2
+        container
+        justifyContent={'space-between'}>
+        <Grid2 size={8}>
+          <Tooltip
+            placement='top'
+            title={title}>
+            <Typography
+              noWrap
+              sx={{ mb: 1, display: 'block' }}
+              variant={'overline'}>
+              {title}
+            </Typography>
+          </Tooltip>
           <LegendIcon {...styles} />
-        </Box>
-      )}
+        </Grid2>
+        <VisibilityIcon
+          layerId={id}
+          visible={visible}
+        />
+      </Grid2>
     </Fragment>
   );
 }
@@ -171,14 +193,39 @@ function ImageIcon(props: LayerStyle) {
     <Grid2>
       {labels.map((d) => (
         <Grid2
+          wrap='nowrap'
           key={d}
           container
           gap={3}
           alignItems={'center'}>
           <ImageRounded />
-          <Typography>{d}</Typography>
+          <Typography
+            noWrap
+            variant='caption'>
+            {d}
+          </Typography>
         </Grid2>
       ))}
+    </Grid2>
+  );
+}
+interface VisibilityIconProps {
+  layerId: number;
+  visible: boolean;
+}
+function VisibilityIcon(props: VisibilityIconProps) {
+  const { layerId, visible } = props;
+  const { setLayerVisibility } = useMapStore((state) => state);
+  const handleVisibility = () => {
+    setLayerVisibility(layerId);
+  };
+  return (
+    <Grid2 alignSelf={'start'}>
+      <IconButton
+        size='small'
+        onClick={handleVisibility}>
+        {visible ? <VisibilityRounded /> : <VisibilityOffRounded />}
+      </IconButton>
     </Grid2>
   );
 }

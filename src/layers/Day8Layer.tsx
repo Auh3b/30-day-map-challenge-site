@@ -1,6 +1,5 @@
 import useMapLayer from '@hooks/useMapLayer';
-import useMapVisibility from '@hooks/useMapVisibility';
-import { orange, red } from '@mui/material/colors';
+import { orange } from '@mui/material/colors';
 import usePageStore from '@storesusePageStore';
 import { format, scaleLog } from 'd3';
 import { ScatterplotLayer } from 'deck.gl';
@@ -19,39 +18,34 @@ interface ArcRow {
   name: string;
 }
 
-const colors = [orange[500], red[500]];
+const colors = [orange[500]];
 
 export default function Day8Layer() {
   const { challengeData } = usePageStore((state) => state);
 
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
+
   const [range, setRange] = useState<null | number[]>(null);
 
-  const { handleLayer } = useMapLayer();
-
-  const isChallengeDataReady = Boolean(challengeData);
-
-  const isVisible = useMapVisibility(day);
-
-  useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          category: 'gradient',
-          visible: isVisible,
-          styles: {
-            colors: colors,
-            labels: ['Start', 'End'],
-          },
-        },
-      });
-    }
-  }, [isVisible, isChallengeDataReady]);
+  const isLoaded = getLayerLoad(day);
 
   const handleRange = (data) => {
     setRange(getRange<ArcRow>(data, 'population'));
   };
+  const visible = getLayerVisibility(day);
+
+  useEffect(() => {
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        category: 'category',
+        visible: true,
+        styles: {
+          colors,
+          labels: ['Displace Population'],
+        },
+      });
+    }
+  }, [isLoaded]);
 
   const handeRadius = useCallback(
     (value: number) => {
@@ -66,20 +60,20 @@ export default function Day8Layer() {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (mapDetails && isVisible)
+  if (mapDetails && isLoaded)
     return new ScatterplotLayer<ArcRow>({
       id: mapDetails.id,
       data: mapDetails.url,
       // stroked: true,
+      visible,
       getRadius: ({ population }) => handeRadius(population),
-      getPosition: ({ latitude, longitude, ...rest }) => {
-        console.log(rest);
+      getPosition: ({ latitude, longitude }) => {
         return [longitude, latitude];
       },
       radiusScale: 10000,
 
       // @ts-ignore
-      getFillColor: d32DeckglColor(colors[1], 100),
+      getFillColor: d32DeckglColor(colors[0], 100),
       onHover: (value) => {
         if (value.object) {
           value.object.html = `<div>
@@ -93,6 +87,7 @@ export default function Day8Layer() {
       },
       pickable: true,
       updateTriggers: {
+        visible: visible,
         getRadius: range,
       },
     });

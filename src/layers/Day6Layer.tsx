@@ -1,10 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { BitmapLayer } from 'deck.gl';
-import useMapVisibility from '@hooks/useMapVisibility';
-import useMapLayer from '@hooks/useMapLayer';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
 import { getViewport, ViewPortBounds } from 'utils/map';
+import useMapLayer from '@hooks/useMapLayer';
 
 type RasterLayerBounds = [number, number, number, number];
 
@@ -16,32 +15,25 @@ const bounds: RasterLayerBounds = [
 export default function Day6Layer() {
   const { challengeData } = usePageStore((state) => state);
 
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
+
   const { width, height, viewState, setViewState } = useMapStore(
     (state) => state,
   );
 
-  const { handleLayer } = useMapLayer();
-
-  const isChallengeDataReady = Boolean(challengeData);
-
-  const isVisible = useMapVisibility(day);
+  const isLoaded = getLayerLoad(day);
+  const visible = getLayerVisibility(day);
 
   useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          category: 'image',
-          visible: isVisible,
-          styles: {
-            colors: [],
-            labels: ['Malawi'],
-          },
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        category: 'image',
+        visible: true,
+        styles: {
+          colors: [],
+          labels: ['Elevation'],
         },
       });
-    }
-    if (isVisible) {
       const bounds: ViewPortBounds = [
         [32.671527767, -17.127083322],
         [35.9148611, -9.364027767],
@@ -54,16 +46,20 @@ export default function Day6Layer() {
       });
       setViewState({ ...viewState, latitude, longitude, zoom });
     }
-  }, [isVisible, isChallengeDataReady]);
+  }, [isLoaded]);
 
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (isVisible && mapDetails)
+  if (isLoaded && mapDetails)
     return new BitmapLayer({
       id: mapDetails.id,
+      visible,
       image: mapDetails.url,
       bounds,
+      updateTriggers: {
+        visible,
+      },
     });
 }

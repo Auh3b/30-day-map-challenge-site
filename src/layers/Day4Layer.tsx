@@ -1,5 +1,4 @@
 import useMapLayer from '@hooks/useMapLayer';
-import useMapVisibility from '@hooks/useMapVisibility';
 import { orange, red } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
@@ -33,6 +32,7 @@ const colors = [orange[500], red[500]];
 export default function Day4Layer() {
   const [range, setRange] = useState<null | NumRange>(null);
 
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
   const { challengeData } = usePageStore((state) => state);
 
   const {
@@ -40,32 +40,25 @@ export default function Day4Layer() {
     setViewState,
   } = useMapStore((state) => state);
 
-  const { handleLayer } = useMapLayer();
+  const isLoaded = getLayerLoad(day);
 
-  const isChallengeDataReady = Boolean(challengeData);
-
-  const isVisible = useMapVisibility(day);
-
-  useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          category: 'gradient',
-          visible: isVisible,
-          styles: {
-            colors: colors,
-            labels: ['Low', 'High'],
-          },
-        },
-      });
-    }
-  }, [isVisible, isChallengeDataReady]);
-
+  const visible = getLayerVisibility(day);
   const handleRange = (data: HexDataType) => {
     setRange(getRange(data, 'sum'));
   };
+
+  useEffect(() => {
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        category: 'gradient',
+        visible: true,
+        styles: {
+          colors,
+          labels: ['Low', 'High'],
+        },
+      });
+    }
+  }, [isLoaded]);
 
   const handleColor = useCallback(
     (value: number) => {
@@ -83,11 +76,11 @@ export default function Day4Layer() {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (mapDetails && isVisible)
+  if (mapDetails && isLoaded)
     return new H3HexagonLayer<HexRow>({
       id: mapDetails.id,
       data: mapDetails.url,
-      visible: true,
+      visible,
       extruded: true,
       elevationScale: 1,
       getHexagon: (d) => d.h3_code,
@@ -112,6 +105,7 @@ export default function Day4Layer() {
       pickable: true,
       updateTriggers: {
         getFillColor: range,
+        visible,
       },
     });
 }

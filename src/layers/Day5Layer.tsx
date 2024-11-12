@@ -1,5 +1,4 @@
 import useMapLayer from '@hooks/useMapLayer';
-import useMapVisibility from '@hooks/useMapVisibility';
 import { orange, red } from '@mui/material/colors';
 import useMapStore from '@storesuseMapStore';
 import usePageStore from '@storesusePageStore';
@@ -31,40 +30,34 @@ function getCoordinate(
 
 export default function Day5Layer() {
   const { challengeData } = usePageStore((state) => state);
+  const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
 
   const {
     viewState: { latitude, longitude, zoom },
     setViewState,
   } = useMapStore((state) => state);
 
-  const { handleLayer } = useMapLayer();
-
-  const isChallengeDataReady = Boolean(challengeData);
-
-  const isVisible = useMapVisibility(day);
+  const isLoaded = getLayerLoad(day);
+  const visible = getLayerVisibility(day);
 
   useEffect(() => {
-    if (isChallengeDataReady) {
-      handleLayer({
-        [day]: {
-          name: challengeData[day].id,
-          title: challengeData[day].title,
-          category: 'gradient',
-          visible: isVisible,
-          styles: {
-            colors: colors,
-            labels: ['Start', 'End'],
-          },
+    if (isLoaded) {
+      handleLayerUpdate(day, {
+        category: 'gradient',
+        visible: true,
+        styles: {
+          colors,
+          labels: ['start', 'end'],
         },
       });
     }
-  }, [isVisible, isChallengeDataReady]);
+  }, [isLoaded]);
 
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
 
-  if (mapDetails && isVisible)
+  if (mapDetails && isLoaded)
     return new ArcLayer<ArcRow>({
       id: mapDetails.id,
       data: mapDetails.url,
@@ -77,7 +70,7 @@ export default function Day5Layer() {
       getSourceColor: d32DeckglColor(colors[0]),
       // @ts-ignore
       getTargetColor: d32DeckglColor(colors[1]),
-      visible: true,
+      visible,
       onDataLoad: () => {
         setViewState({ latitude, longitude, zoom, pitch: 45 });
       },
@@ -89,5 +82,8 @@ export default function Day5Layer() {
         }
       },
       pickable: true,
+      updateTriggers: {
+        visible,
+      },
     });
 }

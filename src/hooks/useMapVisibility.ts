@@ -1,6 +1,6 @@
-import usePageStore from '@storesusePageStore';
+import useMapStore from '@storesuseMapStore';
 
 export default function useMapVisibility(value: number) {
-  const date = usePageStore((state) => state.date);
-  return value === date;
+  const layers = useMapStore((state) => state.layers) ?? {};
+  return Boolean(layers[value]);
 }
