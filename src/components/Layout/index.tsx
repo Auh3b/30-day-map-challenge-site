@@ -15,6 +15,8 @@ import { Outlet } from 'react-router-dom';
 import useMapThemeScheme from '@hooks/useMapThemeScheme';
 import Legend from '@components/common/Map/Legend';
 import useChallengeData from '@hooks/useChallengeData';
+import ToolbarContainer from '@components/common/Map/customMapControls/ToolbarContainer';
+import ZoomToLayer from '@components/common/Map/customMapControls/ZoomToLayer';
 
 export default function index() {
   useChallengeData();
@@ -23,8 +25,8 @@ export default function index() {
       <DayChallengeDetailsModal />
       <Header />
       <Content>
-        <ThemeChanger />
-        <DetailToggler />
+        <MapToolbarLeft />
+        <MapToolbarRight />
         <LegendUI />
         <Outlet />
       </Content>
@@ -64,25 +66,34 @@ function ThemeChanger() {
   );
 }
 
+function MapToolbarLeft() {
+  return (
+    <ToolbarContainer>
+      <DetailToggler />
+      <ZoomToLayer />
+    </ToolbarContainer>
+  );
+}
+
+function MapToolbarRight() {
+  return (
+    <ToolbarContainer placement={'top-right'}>
+      <ThemeChanger />
+    </ToolbarContainer>
+  );
+}
+
 function DetailToggler() {
   const { welcomed, setWelcomed } = usePageStore((state) => state);
   const handleChange = () => {
     setWelcomed(!welcomed);
   };
   return (
-    <Fragment>
-      <Box
-        position={'absolute'}
-        top={8}
-        zIndex={100}
-        left={16}>
-        <SingleModeSwitch
-          title='information'
-          onClick={handleChange}>
-          <InfoOutlined />
-        </SingleModeSwitch>
-      </Box>
-    </Fragment>
+    <SingleModeSwitch
+      title='information'
+      onClick={handleChange}>
+      <InfoOutlined />
+    </SingleModeSwitch>
   );
 }
 
