@@ -39,7 +39,7 @@ export default function useChallengeData() {
 }
 
 function getLatestOutlineDay(value: MapChallengeData) {
-  const days = Object.keys(value);
+  const days = Object.keys(value).map((d) => +d);
   const latest_day = max(days);
   return latest_day;
 }
