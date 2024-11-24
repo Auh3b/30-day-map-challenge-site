@@ -187,7 +187,6 @@ function MapDataModalContent(props: MapDataModalContentProps) {
 function ModalContentSectionTitle(props: PropsWithChildren) {
   return (
     <Typography
-      fontStyle={'italic'}
       variant='subtitle1'
       sx={{ mb: 1 }}>
       {props.children}
