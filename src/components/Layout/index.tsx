@@ -26,9 +26,9 @@ export default function index() {
         <ThemeChanger />
         <DetailToggler />
         <LegendUI />
+        <Outlet />
       </Content>
       <Footer />
-      <Outlet />
     </Layout>
   );
 }
