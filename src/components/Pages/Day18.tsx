@@ -1,13 +1,11 @@
-import OpacityControl from '@components/common/Map/customMapControls/OpacityControl';
 import useDayChallenge from '@hooks/useDayChallenge';
 import useMapLayer from '@hooks/useMapLayer';
-import { Box, Paper } from '@mui/material';
 import { useEffect } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
-const day = 10;
+const day = 18;
 
-export default function Day10() {
+export default function Day18() {
   const { handleLayerAdd, handleLayerRemove } = useMapLayer();
   const { isDayChallengeReady, challengeData } = useDayChallenge();
 
@@ -24,18 +22,5 @@ export default function Day10() {
     };
   }, [isDayChallengeReady]);
 
-  return (
-    <Fragment>
-      <Box
-        zIndex={100}
-        position={'absolute'}
-        bottom={8}
-        left={16}
-        minWidth={'300px'}>
-        <Paper sx={{ p: 2 }}>
-          <OpacityControl layerId={day} />
-        </Paper>
-      </Box>
-    </Fragment>
-  );
+  return <Fragment></Fragment>;
 }
