@@ -26,7 +26,6 @@ export default function Legend() {
     setIsOpen((value) => !value);
   };
   const _layers = useMapStore((state) => state.layers);
-  console.log(_layers);
   const layers = useMemo(() => {
     if (!_layers) return [];
 
@@ -68,7 +67,6 @@ function LegendTitle(props: LegendTitleProps) {
       alignContent={'center'}
       justifyContent={'space-between'}>
       <Typography
-        fontStyle={'italic'}
         variant={'subtitle1'}
         sx={{ alignSelf: 'center' }}>
         Legend
