@@ -15,9 +15,8 @@ export default function Day7Layer() {
 
   const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
 
-  const { width, height, viewState, setViewState } = useMapStore(
-    (state) => state,
-  );
+  const { width, height, viewState, setViewState, setLayerExtent } =
+    useMapStore((state) => state);
   const isLoaded = getLayerLoad(day);
   const visible = getLayerVisibility(day);
   useEffect(() => {
@@ -35,13 +34,14 @@ export default function Day7Layer() {
         [34.586, -12.149],
         [34.818, -11.985],
       ];
-      const { latitude, longitude, zoom } = getViewport({
+      const newViewState = getViewport({
         bounds,
         width,
         height,
         padding: 20,
       });
-      setViewState({ ...viewState, latitude, longitude, zoom });
+      setViewState({ ...viewState, ...newViewState });
+      setLayerExtent(day, newViewState);
     }
   }, [isLoaded]);
 

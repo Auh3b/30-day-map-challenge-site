@@ -13,9 +13,13 @@ export default function Day1Layer() {
   const { challengeData } = usePageStore((state) => state);
 
   const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
-  const { width, height, setViewState } = useMapStore((state) => state);
+  const { width, height, setViewState, setLayerExtent } = useMapStore(
+    (state) => state,
+  );
+
   const isLoaded = getLayerLoad(day);
   const visible = getLayerVisibility(day);
+
   useEffect(() => {
     if (isLoaded) {
       handleLayerUpdate(day, {
@@ -28,6 +32,7 @@ export default function Day1Layer() {
       });
     }
   }, [isLoaded]);
+
   const mapDetails = useMemo(() => {
     if (challengeData) return challengeData[day];
   }, [challengeData]);
@@ -55,6 +60,7 @@ export default function Day1Layer() {
         ];
         const viewState = getViewport({ bounds, width, height, padding: 20 });
         setViewState({ ...viewState, pitch: 0 });
+        setLayerExtent(day, viewState);
       },
       updateTriggers: {
         visible,

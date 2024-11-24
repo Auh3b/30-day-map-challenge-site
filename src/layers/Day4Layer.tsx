@@ -38,6 +38,7 @@ export default function Day4Layer() {
   const {
     viewState: { latitude, longitude, zoom },
     setViewState,
+    setLayerExtent,
   } = useMapStore((state) => state);
 
   const isLoaded = getLayerLoad(day);
@@ -94,6 +95,7 @@ export default function Day4Layer() {
       onDataLoad: (data) => {
         handleRange(data as HexDataType);
         setViewState({ latitude, longitude, zoom, pitch: 45 });
+        setLayerExtent(day, { longitude, latitude, zoom, pitch: 45 });
       },
       onHover: (value) => {
         if (value.object) {

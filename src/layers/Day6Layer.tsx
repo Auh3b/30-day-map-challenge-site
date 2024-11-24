@@ -17,9 +17,8 @@ export default function Day6Layer() {
 
   const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
 
-  const { width, height, viewState, setViewState } = useMapStore(
-    (state) => state,
-  );
+  const { width, height, viewState, setViewState, setLayerExtent } =
+    useMapStore((state) => state);
 
   const isLoaded = getLayerLoad(day);
   const visible = getLayerVisibility(day);
@@ -38,13 +37,14 @@ export default function Day6Layer() {
         [32.671527767, -17.127083322],
         [35.9148611, -9.364027767],
       ];
-      const { latitude, longitude, zoom } = getViewport({
+      const newViewState = getViewport({
         bounds,
         width,
         height,
         padding: 20,
       });
-      setViewState({ ...viewState, latitude, longitude, zoom });
+      setViewState({ ...viewState, ...newViewState });
+      setLayerExtent(day, newViewState);
     }
   }, [isLoaded]);
 

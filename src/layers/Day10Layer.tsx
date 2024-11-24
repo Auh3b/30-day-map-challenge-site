@@ -24,9 +24,8 @@ export default function Day10Layer() {
     getExtraLayerPros,
   } = useMapLayer();
 
-  const { width, height, viewState, setViewState } = useMapStore(
-    (state) => state,
-  );
+  const { width, height, viewState, setViewState, setLayerExtent } =
+    useMapStore((state) => state);
 
   const opacity = getExtraLayerPros(day, 'opacity') || 1;
   const isLoaded = getLayerLoad(day);
@@ -49,13 +48,14 @@ export default function Day10Layer() {
         [minX, minY],
         [maxX, maxY],
       ];
-      const { latitude, longitude, zoom } = getViewport({
+      const newViewState = getViewport({
         bounds,
         width,
         height,
         padding: 20,
       });
-      setViewState({ ...viewState, latitude, longitude, zoom });
+      setViewState({ ...viewState, ...newViewState });
+      setLayerExtent(day, newViewState);
     }
   }, [isLoaded]);
 

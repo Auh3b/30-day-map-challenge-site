@@ -1,4 +1,4 @@
-import { Layer, Layers } from 'types/map';
+import { Layer, LayerExtent, Layers } from 'types/map';
 import { MapDescription } from 'types/data';
 import { create } from 'zustand';
 import { MapViewState } from 'deck.gl';
@@ -15,6 +15,7 @@ interface MapStore {
   dataUrl?: string;
   loaded: boolean;
   layers?: Layers;
+  layerExtent?: LayerExtent;
   setBasemapVisibility: (value: boolean) => void;
   setBasemapUrl: (value: string) => void;
   setLayer: (layerId: number, value: Layer) => void;
@@ -23,6 +24,7 @@ interface MapStore {
   setViewState: (value: MapViewState) => void;
   setLayerVisibility: (value: number) => void;
   setLayerRemove: (value: number) => void;
+  setLayerExtent: (layerId: number, value: MapViewState) => void;
 }
 
 const useMapStore = create<MapStore>((set) => ({
@@ -101,6 +103,12 @@ const useMapStore = create<MapStore>((set) => ({
         },
       };
     }),
+  setLayerExtent: (layerId, value) =>
+    set(() => ({
+      layerExtent: {
+        [layerId]: value,
+      },
+    })),
 }));
 
 export default useMapStore;

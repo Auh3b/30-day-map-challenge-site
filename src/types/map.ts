@@ -1,3 +1,5 @@
+import { MapViewState } from 'deck.gl';
+
 export type LayerLegendCategory = 'category' | 'gradient' | 'image';
 
 export interface LayerStyle {
@@ -19,4 +21,8 @@ export interface Layer {
 
 export interface Layers {
   [k: number]: Layer;
+}
+
+export interface LayerExtent {
+  [k: number]: MapViewState;
 }

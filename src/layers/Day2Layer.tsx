@@ -14,7 +14,9 @@ export default function Day2Layer() {
 
   const { handleLayerUpdate, getLayerLoad, getLayerVisibility } = useMapLayer();
 
-  const { width, height, setViewState } = useMapStore((state) => state);
+  const { width, height, setViewState, setLayerExtent } = useMapStore(
+    (state) => state,
+  );
 
   const isLoaded = getLayerLoad(day);
   const visible = getLayerVisibility(day);
@@ -53,6 +55,7 @@ export default function Day2Layer() {
         ];
         const viewState = getViewport({ bounds, width, height, padding: 20 });
         setViewState({ ...viewState, pitch: 0 });
+        setLayerExtent(day, viewState);
       },
       updateTriggers: {
         visible,
