@@ -13,8 +13,6 @@ export default function useMapLayer() {
     setLayer(layerId, value);
   };
 
-  console.log(layers);
-
   const handleLayerRemove = (value: number) => {
     setLayerRemove(value);
   };
@@ -36,6 +34,13 @@ export default function useMapLayer() {
     },
     [layers],
   );
+
+  const getExtraLayerPros = useCallback(
+    (layerId: number, prop: string) => {
+      return layers[layerId]?.extras?.[prop] || undefined;
+    },
+    [layers],
+  );
   return {
     layers,
     handleLayerAdd,
@@ -43,5 +48,6 @@ export default function useMapLayer() {
     handleLayerUpdate,
     getLayerLoad,
     getLayerVisibility,
+    getExtraLayerPros,
   };
 }
