@@ -12,6 +12,9 @@ export interface Layer {
   visible?: boolean;
   category?: LayerLegendCategory;
   styles?: LayerStyle;
+  extras?: {
+    [k: string]: any;
+  };
 }
 
 export interface Layers {
