@@ -12,6 +12,7 @@ import Day10 from '@components/Pages/Day10.';
 import Day9 from '@components/Pages/Day9';
 import Day11 from '@components/Pages/Day11';
 import Day18 from '@components/Pages/Day18';
+import Day16 from '@components/Pages/Day16';
 
 const routes: RouteObject[] = [
   {
@@ -61,6 +62,10 @@ const routes: RouteObject[] = [
       {
         path: '11',
         element: <Day11 />,
+      },
+      {
+        path: '16',
+        element: <Day16 />,
       },
       {
         path: '18',

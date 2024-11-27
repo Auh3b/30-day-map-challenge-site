@@ -1,4 +1,5 @@
-import { color, rgb, scaleLinear } from 'd3';
+import { MapChallengeData } from 'types/data';
+import { color, max, rgb, scaleLinear } from 'd3';
 
 export function d32DeckglColor(value: string, opacity?: number): number[] {
   const colorObject = color(value);
@@ -16,4 +17,10 @@ export function DeckglColor2D3(value: number[]): string {
   const trueAlpha = alphaOn255Scale(alpha);
   const newColor = rgb(red, green, blue, trueAlpha);
   return newColor.formatHex();
+}
+
+export function getLatestOutlineDay(value: MapChallengeData) {
+  const days = Object.keys(value).map((d) => +d);
+  const latest_day = max(days);
+  return latest_day;
 }

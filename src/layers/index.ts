@@ -1,5 +1,6 @@
 import Day10Layer from './Day10Layer';
 import Day11Layer from './Day11Layer';
+import Day16Layer from './Day16Layer';
 import Day18Layer from './Day18Layer';
 import Day1Layer from './Day1Layer';
 import Day2Layer from './Day2Layer';
@@ -24,6 +25,7 @@ const getLayers = () => {
     Day9Layer(),
     Day10Layer(),
     Day11Layer(),
+    Day16Layer(),
     Day18Layer(),
   ];
 };
